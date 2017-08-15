@@ -1,0 +1,20 @@
+[
+    
+    {"website": "customicondesign.com", 
+     "classid": "btn-1",
+     "style": [
+          "customicondesign-office1-reflection",
+          "customicondesign-office1-shadow",
+          "customicondesign-office1-simple",
+          "customicondesign-office2-reflection"
+     ]},
+
+    {"website": "Double-J Design", 
+     "classid": "btn-2",
+     "style": [
+          "Button Fest",
+          "language-flags",
+          "origami"
+     ]}
+     
+]

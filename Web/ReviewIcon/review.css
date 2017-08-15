@@ -1,13 +1,80 @@
 body {
     width: 100%;
-    padding: 10px;
-    margin: 10px;
     font-family: Consolas, 微軟正黑體;
+}
+.webtitle {
+    padding: 20px;
 }
 .col {
     padding-right: 5px;
     padding-left: 5px;
+    width: 100%;
 }
 .card-header {
-    font-size: 10px;
+    font-size: 8px;
+}
+.col_img_size16 {
+    width: 16px;
+}
+.col_img_size24 {
+    width: 24px;
+}
+.col_img_size32 {
+    width: 32px;
+}
+.col_img_size48 {
+    width: 48px;
+}
+.col_img_size64 {
+    width: 64px;
+}
+.btn-1 {
+    color: #FFFFFF;
+    background-color: #113F8C;
+    border-color: #113F8C;
+}
+.btn-2 {
+    color: #FFFFFF;
+    background-color: #01A4A4;
+    border-color: #01A4A4;
+}
+.btn-3 {
+    color: #FFFFFF;
+    background-color: #00A1CB;
+    border-color: #00A1CB;
+}
+.btn-4 {
+    color: #FFFFFF;
+    background-color: #61AE24;
+    border-color: #61AE24;
+}
+.btn-5 {
+    color: #FFFFFF;
+    background-color: #D0D102;
+    border-color: #D0D102;
+}
+.btn-6 {
+    color: #FFFFFF;
+    background-color: #32742C;
+    border-color: #32742C;
+}
+.btn-7 {
+    color: #FFFFFF;
+    background-color: #D70060;
+    border-color: #D70060;
+}
+.btn-8 {
+    color: #FFFFFF;
+    background-color: #E54028;
+    border-color: #E54028;
+}
+.btn-9 {
+    color: #FFFFFF;
+    background-color: #F18D05;
+    border-color: #F18D05;
+}
+.btn-10 {
+    color: #FFFFFF;
+    background-color: #616161;
+    border-color: #616161;
 }

@@ -9,30 +9,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="review.css">
   </head>
-  <body ng-app>
-    <h1>Hello, world!</h1>
-    <!--碰到極大的困難-->
-    <!--怎麽動態產生dropdown的選項，第一個dropdown的選項(iconurl)可以寫死，第二個dropdown的選項(iconfolder)怎麽動態-->
-    <!--怎麽即時讀取電腦或檔案的資料夾跟檔案進來-->
-    <!--不能即時讀取，是不是可以讀文檔，但要怎麽解析成資料夾與檔案-->
-    <!--怎麽repeat圖檔顯示-->
-    <!-- Example single danger button -->
-    <div class="btn-group">
-      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        customicondesign.com
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">customicondesign-flag2</a>
-        <a class="dropdown-item" href="#">customicondesign-flags</a>
-        <a class="dropdown-item" href="#">customicondesign-mono-business1-black</a>
+  <body ng-app="app1">
+    <div class="webtitle">
+      <h1>Hello, Icon!</h1>
+      <!--碰到極大的困難-->
+      <!--怎麽動態產生dropdown的選項，第一個dropdown的選項(iconurl)可以寫死，第二個dropdown的選項(iconfolder)怎麽動態-->
+      <!--怎麽即時讀取電腦或檔案的資料夾跟檔案進來: Chrome有安全性考量，必須右鍵內容加參數 \-\-allow-file-access-from-files-->
+      <!--不能即時讀取，是不是可以讀文檔，但要怎麽解析成資料夾與檔案: 目前用$http.get，但似乎不能用絕對路徑，目前工具必須放置於適當位置-->
+      <!--怎麽repeat圖檔顯示: 解決-->
+      <!--怎麼讓選項點了以後，去重新產生iconfile呈現-->
+      <!-- Example single danger button -->
+      <div class="btn-group" ng-controller="PathCtrl">
+        <div style="padding-right: 10px;" ng-repeat="item in paths">
+          <button type="button" class="btn btn-info dropdown-toggle {{item.classid}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{item.website}}
+          </button>
+          <div class="dropdown-menu">
+            <a ng-repeat="style in item.style" class="dropdown-item">{{style}}</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="container" ng-controller="MainCtrl">
       <div class="row">
-        <div class="col col-sm-2 col-md-2 col-lg-2 " ng-repeat="item in items">
+        <div class="col" ng-repeat="item in items">
           <div class="card" style="width: 100%;">
             <div class="card-header">{{item.header}}</div>
-            <img class="card-img-top" ng-src="{{item.path}}" ng-alt="{{item.header}}">
+            <img class="card-img-top {{item.classid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}">
           </div>
         </div>
       </div>

@@ -1,36 +1,19 @@
-function MainCtrl($scope) {
-    
- 
-  $scope.items = [
-    
-    {header: 'add1.png', 
-     path: '../Icon/customicondesign.com/customicondesign-office1-reflection/png/add1.png'},
-    
-    {header: 'add1-16.png', 
-     path: 'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add1-16.png'},
-    
-    {header: 'add1-24.png', 
-     path: 'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add1-24.png'},
-    
-    {header: 'add1-32.png',
-     path:'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add1-32.png'},
-    
-    {header: 'add1-48.png',
-     path:'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add1-48.png'},
-     
-    {header: 'add1-64.png',
-     path:'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add1-64.png'},
-     
-    {header: 'add1-128.png',
-     path:'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add1-128.png'},
-     
-    {header: 'add2.png',
-     path:'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add2.png'},
-     
-    {header: 'add2-16.png',
-     path:'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add2-16.png'},
-     
-    {header: 'add2-32.png',
-     path:'Z:\Picture\test\Icon\customicondesign.com\customicondesign-office1-reflection\png\add2-32.png'},
-  ];
-}
+var app = angular.module("app1",[]);
+
+app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+    $scope.items = [];
+    $http.get('filelist/customicondesign-office1-reflection.txt').success(function(data){
+    angular.forEach(data,function(item, ind){
+      $scope.items.push(item);
+    });
+  });
+}]);
+
+app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
+    $scope.paths = [];
+    $http.get('pathlist/website.txt').success(function(data){
+      angular.forEach(data,function(item, ind){
+        $scope.paths.push(item);
+      });
+    });
+}]);
