@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="review.css">
   </head>
-  <body ng-app="app1">
+  <body ng-app="app1" ng-controller="MainCtrl">
     <div class="webtitle">
       <h1>Hello, Icon!</h1>
       <!--碰到極大的困難-->
@@ -18,8 +18,11 @@
       <!--不能即時讀取，是不是可以讀文檔，但要怎麽解析成資料夾與檔案: 目前用$http.get，但似乎不能用絕對路徑，目前工具必須放置於適當位置-->
       <!--怎麽repeat圖檔顯示: 解決-->
       <!--怎麼讓選項點了以後，去重新產生iconfile呈現-->
+      <!--如果資料結構是有子陣列的，不知道要怎麼讓選項可以出現-->
+      <!--不知道怎麽讓選項可以回到controller去處理-->
       <!-- Example single danger button -->
-      <div class="btn-group" ng-controller="PathCtrl">
+      <div class="btn-group">
+        <!--
         <div style="padding-right: 10px;" ng-repeat="item in paths">
           <button type="button" class="btn btn-info dropdown-toggle {{item.classid}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{item.website}}
@@ -28,9 +31,12 @@
             <a ng-repeat="style in item.style" class="dropdown-item">{{style}}</a>
           </div>
         </div>
+        -->
+        <select ng-model="sel.style" ng-options="item.style as item.style group by item.website for item in paths"></select>
       </div>
+      {{sel.website}} {{sel.style}}
     </div>
-    <div class="container" ng-controller="MainCtrl">
+    <div class="container" ng-controller="PathCtrl">
       <div class="row">
         <div class="col" ng-repeat="item in items">
           <div class="card" style="width: 100%;">

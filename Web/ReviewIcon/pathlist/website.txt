@@ -1,20 +1,25 @@
 [
     
     {"website": "customicondesign.com", 
-     "classid": "btn-1",
-     "style": [
-          "customicondesign-office1-reflection",
-          "customicondesign-office1-shadow",
-          "customicondesign-office1-simple",
-          "customicondesign-office2-reflection"
-     ]},
-
+     "style": "customicondesign-office1-reflection"
+    },
+    {"website": "customicondesign.com", 
+     "style": "customicondesign-office1-shadow"
+    },
+    {"website": "customicondesign.com", 
+     "style": "customicondesign-office1-simple"
+    },
+    {"website": "customicondesign.com", 
+     "style": "customicondesign-office2-reflection"
+    },
     {"website": "Double-J Design", 
-     "classid": "btn-2",
-     "style": [
-          "Button Fest",
-          "language-flags",
-          "origami"
-     ]}
-     
+     "style": "Button Fest"
+    },
+    {"website": "Double-J Design", 
+     "style": "language-flags"
+    },
+    {"website": "Double-J Design", 
+     "style": "origami"
+    }
+
 ]
