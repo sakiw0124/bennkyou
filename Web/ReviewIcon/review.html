@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="review.css">
+  </head>
+  <body ng-app="app1" ng-controller="MainCtrl">
+    <div class="webtitle">
+      <h1>Hello, Icon!</h1>
+      <!--碰到極大的困難-->
+      <!--怎麽動態產生dropdown的選項，第一個dropdown的選項(iconurl)可以寫死，第二個dropdown的選項(iconfolder)怎麽動態-->
+      <!--怎麽即時讀取電腦或檔案的資料夾跟檔案進來: Chrome有安全性考量，必須右鍵內容加參數 \-\-allow-file-access-from-files-->
+      <!--不能即時讀取，是不是可以讀文檔，但要怎麽解析成資料夾與檔案: 目前用$http.get，但似乎不能用絕對路徑，目前工具必須放置於適當位置-->
+      <!--怎麽repeat圖檔顯示: 解決-->
+      <!--怎麼讓選項點了以後，去重新產生iconfile呈現-->
+      <!--如果資料結構是有子陣列的，不知道要怎麼讓選項可以出現: 參考sample1我好像繞了大半圈，甚麼filter都不用?-->
+      <!--不知道怎麽讓選項可以回到controller去處理: 同上，不需要-->
+      <!--怎麽把選擇的值放到另一個controller-->
+      <!-- Example single danger button -->
+      <div class="btn-group">
+        <!--
+        <div style="padding-right: 10px;" ng-repeat="item in paths">
+          <button type="button" class="btn btn-info dropdown-toggle {{item.classid}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{item.website}}
+          </button>
+          <div class="dropdown-menu">
+            <a ng-repeat="style in item.style" class="dropdown-item">{{style}}</a>
+          </div>
+        </div>
+        -->
+        <select ng-model="selwebsite" ng-options="item.website for item in paths" ng-change="websitechange()"></select>
+        <select ng-model="selstyle" ng-options="item.style for item in selwebsite.styles"></select>
+      </div>
+    </div>
+    <div class="container" ng-controller="PathCtrl">
+      <div class="row">
+        <div class="col" ng-repeat="item in items">
+          <div class="card" style="width: 100%;">
+            <div class="card-header">{{item.header}}</div>
+            <img class="card-img-top {{item.classid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="review.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </body>
+</html>
