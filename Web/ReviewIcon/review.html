@@ -8,10 +8,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="review.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
   </head>
   <body ng-app="app1" ng-controller="MainCtrl">
-    <div class="webtitle">
-      <h1>Hello, Icon!</h1>
+    <div class="webtitle border border-light border-top-0 border-left-0 border-right-0">
+      <h1><i class="fa fa-id-card-o" aria-hidden="true"></i> Hello, Icon!</h1>
       <!--碰到極大的困難-->
       <!--怎麽動態產生dropdown的選項，第一個dropdown的選項(iconurl)可以寫死，第二個dropdown的選項(iconfolder)怎麽動態-->
       <!--怎麽即時讀取電腦或檔案的資料夾跟檔案進來: Chrome有安全性考量，必須右鍵內容加參數 \-\-allow-file-access-from-files-->
@@ -20,7 +21,8 @@
       <!--怎麼讓選項點了以後，去重新產生iconfile呈現-->
       <!--如果資料結構是有子陣列的，不知道要怎麼讓選項可以出現: 參考sample1我好像繞了大半圈，甚麼filter都不用?-->
       <!--不知道怎麽讓選項可以回到controller去處理: 同上，不需要-->
-      <!--怎麽把選擇的值放到另一個controller-->
+      <!--怎麽把選擇的值放到另一個controller: broadcast & on-->
+      <!--這裡用的select導致資料格式好奇怪，怎麼變純字串，js一層層好白癡-->
       <!-- Example single danger button -->
       <div class="btn-group">
         <!--
@@ -33,11 +35,12 @@
           </div>
         </div>
         -->
-        <select ng-model="selwebsite" ng-options="item.website for item in paths" ng-change="websitechange()"></select>
-        <select ng-model="selstyle" ng-options="item.style for item in selwebsite.styles"></select>
+        <select class="custom-select" ng-model="selwebsite" ng-options="item.website for item in paths" ng-change="websitechange()"></select>
+        <span style="padding-left: 5px"></span>
+        <select class="custom-select" ng-model="selstyle" ng-options="item.style for item in selwebsite.styles"></select>
       </div>
     </div>
-    <div class="container" ng-controller="PathCtrl">
+    <div class="container main" ng-controller="PathCtrl">
       <div class="row">
         <div class="col" ng-repeat="item in items">
           <div class="card" style="width: 100%;">

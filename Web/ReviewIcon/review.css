@@ -4,6 +4,16 @@ body {
 }
 .webtitle {
     padding: 20px;
+    background-color: #F5CEBF;
+    color: #9D7657;
+}
+.main {
+    margin-top: 10px;
+}
+.custom-select {
+    color: #E44F6C;
+    border-color: #FCB1B8;
+    background-size: 5px 10px;
 }
 .col {
     padding-right: 5px;
