@@ -38,6 +38,12 @@ body {
 .col_img_size64 {
     width: 64px;
 }
+.col_img_size128 {
+    width: 128px;
+}
+.col_img_size256 {
+    width: 256px;
+}
 .btn-1 {
     color: #FFFFFF;
     background-color: #113F8C;

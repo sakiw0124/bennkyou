@@ -1,0 +1,16 @@
+[
+    
+    {"website": "customicondesign.com", 
+     "styles": [
+     {"style":"customicondesign-office1-reflection"},
+     {"style":"customicondesign-office1-shadow"},
+     {"style":"customicondesign-office1-simple"},
+     {"style":"customicondesign-office2-reflection"}
+     ]},
+    {"website": "Double-J Design", 
+     "styles": [{"style":"Button Fest"},
+     {"style":"language-flags"},
+     {"style":"origami"}]
+    }
+
+]
