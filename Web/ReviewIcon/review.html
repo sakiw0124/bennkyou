@@ -25,6 +25,11 @@
       <!--這裡用的select導致資料格式好奇怪，怎麼變純字串，js一層層好白癡-->
       <!-- Example single danger button -->
       <div class="btn-group">
+        <select class="custom-select" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
+        <span style="padding-left: 5px"></span>
+        <select class="custom-select" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
+      </div>
+      <div class="btn-group">
         <!--
         <div style="padding-right: 10px;" ng-repeat="item in paths">
           <button type="button" class="btn btn-info dropdown-toggle {{item.classid}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

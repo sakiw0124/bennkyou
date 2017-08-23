@@ -16,6 +16,27 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
         //console.log('send:',$scope.selwebsite,' and ',$scope.selstyle);
       })
     });
+    $scope.websites = [];
+    $http.get('pathlist/website2.txt').success(function(data){
+      angular.forEach(data,function(item, ind){
+        $scope.websites.push(item);
+      });
+      $scope.chgwebsite = $scope.websites[0];
+      $scope.$watch('chgwebsite', function(newValue, oldValue) {
+        console.log('choose:',$scope.chgwebsite);
+        $scope.directory = 'filelist/' + $scope.chgwebsite.website + '/directory.txt'
+        $scope.directorys = [];
+        $http.get($scope.directory).success(function(data) {
+          angular.forEach(data,function(item, ind){
+            $scope.directorys.push(item);
+          });
+          $scope.chgstyle = $scope.directorys[0];
+          $scope.$watch('chgstyle', function(newValue, oldValue) {
+            $scope.$broadcast('sendselect',{'website':$scope.chgwebsite,'style':$scope.chgstyle});
+          });
+        });
+      });
+    });
 }]);
 
 app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
