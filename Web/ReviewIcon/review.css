@@ -4,24 +4,30 @@ body {
 }
 .webtitle {
     padding: 20px;
-    background-color: #F5CEBF;
-    color: #9D7657;
+    background-color: #676674;
+    color: #BDB3B1;
 }
 .main {
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 .custom-select {
-    color: #E44F6C;
-    border-color: #FCB1B8;
+    color: #9EA7AE;
+    border-color: #D2CFCA;
     background-size: 5px 10px;
 }
+.card {
+    width: 100px;
+    height: 100px;
+}
 .col {
-    padding-right: 5px;
-    padding-left: 5px;
-    width: 100%;
+    padding: 5px;
 }
 .card-header {
     font-size: 8px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 .col_img_size16 {
     width: 16px;
@@ -44,6 +50,13 @@ body {
 .col_img_size256 {
     width: 256px;
 }
+.badge {
+    padding-top: 10px;
+    font-size: 100%;
+    background-color: #CEACBC;
+}
+
+/*之後用不到刪了*/
 .btn-1 {
     color: #FFFFFF;
     background-color: #113F8C;

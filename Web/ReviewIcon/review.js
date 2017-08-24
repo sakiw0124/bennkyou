@@ -24,7 +24,7 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
       $scope.chgwebsite = $scope.websites[0];
       $scope.$watch('chgwebsite', function(newValue, oldValue) {
         console.log('choose:',$scope.chgwebsite);
-        $scope.directory = 'filelist/' + $scope.chgwebsite.website + '/directory.txt'
+        $scope.directory = 'filelist/' + $scope.chgwebsite.website + '/000_directory.txt'
         $scope.directorys = [];
         $http.get($scope.directory).success(function(data) {
           angular.forEach(data,function(item, ind){
@@ -32,7 +32,11 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
           });
           $scope.chgstyle = $scope.directorys[0];
           $scope.$watch('chgstyle', function(newValue, oldValue) {
-            $scope.$broadcast('sendselect',{'website':$scope.chgwebsite,'style':$scope.chgstyle});
+            $scope.$broadcast('sendselect',{'website':$scope.chgwebsite,'style':$scope.chgstyle}); //往子階層推送變數, 在子階層用on接
+            $scope.$on('SendTotalCount', function(event,data) {
+              console.log('total:',data.totalcount);
+              $scope.totalcount=data.totalcount; //我這是不是一種不合規則的做法? 用這樣送給view?
+            });
           });
         });
       });
@@ -55,6 +59,7 @@ app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
           angular.forEach(data,function(item, ind){
             $scope.items.push(item);
           });
+          $scope.$emit('SendTotalCount',{'totalcount':$scope.items.length}); //往父接層推送變數, 在父階層用on接
         })
         .error(function (error) {
           console.log('檔案不存在:', $scope.file);

@@ -8,6 +8,7 @@ for /d %%i IN (filelist\*) DO (
   set directory=%%i
   set directory=!directory:~9!
   echo !directory!
+  set dirlist=filelist\!directory!\000_directory.txt
   set path=..\Icon\!directory!\*
   ::echo !path!
   for /d %%i IN (!path!) DO (
@@ -21,6 +22,7 @@ for /d %%i IN (filelist\*) DO (
 
   )
   set total=!total!{"website":"!directory!","styles": [!styles:~0,-1!]},
+  echo [!styles:~0,-1!] > !dirlist!
   ::要清除延遲變數，不然會一直加加加上去
   set styles=!styles:~0,0!
 )

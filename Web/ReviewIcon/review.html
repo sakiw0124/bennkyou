@@ -12,7 +12,7 @@
   </head>
   <body ng-app="app1" ng-controller="MainCtrl">
     <div class="webtitle border border-light border-top-0 border-left-0 border-right-0">
-      <h1><i class="fa fa-id-card-o" aria-hidden="true"></i> Hello, Icon!</h1>
+      <h3><i class="fa fa-id-card-o" aria-hidden="true"></i> Hello, Icon!</h3>
       <!--碰到極大的困難-->
       <!--怎麽動態產生dropdown的選項，第一個dropdown的選項(iconurl)可以寫死，第二個dropdown的選項(iconfolder)怎麽動態-->
       <!--怎麽即時讀取電腦或檔案的資料夾跟檔案進來: Chrome有安全性考量，必須右鍵內容加參數 \-\-allow-file-access-from-files-->
@@ -28,9 +28,10 @@
         <select class="custom-select" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
         <span style="padding-left: 5px"></span>
         <select class="custom-select" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
+        <span style="padding-left: 5px"></span><span class="badge badge-info">{{totalcount}}</span>
       </div>
+      <!--
       <div class="btn-group">
-        <!--
         <div style="padding-right: 10px;" ng-repeat="item in paths">
           <button type="button" class="btn btn-info dropdown-toggle {{item.classid}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{item.website}}
@@ -39,18 +40,20 @@
             <a ng-repeat="style in item.style" class="dropdown-item">{{style}}</a>
           </div>
         </div>
-        -->
         <select class="custom-select" ng-model="selwebsite" ng-options="item.website for item in paths" ng-change="websitechange()"></select>
         <span style="padding-left: 5px"></span>
         <select class="custom-select" ng-model="selstyle" ng-options="item.style for item in selwebsite.styles"></select>
       </div>
+      -->
     </div>
     <div class="container main" ng-controller="PathCtrl">
       <div class="row">
         <div class="col" ng-repeat="item in items">
-          <div class="card" style="width: 100%;">
-            <div class="card-header">{{item.header}}</div>
-            <img class="card-img-top col_img_size48" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}">
+          <div class="card">
+            <div class="card-header" title="{{item.header}}">{{item.header}}</div>
+            <div style="text-align: center; padding-top: 5px;">
+              <img class="card-img-top col_img_size48" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}">
+            </div>
           </div>
         </div>
       </div>
