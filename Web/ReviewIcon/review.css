@@ -4,8 +4,8 @@ body {
 }
 .webtitle {
     padding: 20px;
-    background-color: #676674;
-    color: #BDB3B1;
+    background-color: #EDEAE1;
+    color: #A6B07B;
 }
 .main {
     margin-top: 10px;
@@ -13,7 +13,7 @@ body {
 }
 .custom-select {
     color: #9EA7AE;
-    border-color: #D2CFCA;
+    border-color: #79ADAF;
     background-size: 5px 10px;
 }
 .card {
@@ -25,6 +25,14 @@ body {
 }
 .card-header {
     font-size: 8px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.card-content {
+    text-align: center;
+    padding-top: 5px;
+    font-size: 6px;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
@@ -41,6 +49,10 @@ body {
 .col_img_size48 {
     width: 48px;
 }
+.col_img_size48_bg {
+    width: 48px;
+    background-color: #79ADAF;
+}
 .col_img_size64 {
     width: 64px;
 }
@@ -53,7 +65,7 @@ body {
 .badge {
     padding-top: 10px;
     font-size: 100%;
-    background-color: #CEACBC;
+    background-color: #9FD38D;
 }
 
 /*之後用不到刪了*/

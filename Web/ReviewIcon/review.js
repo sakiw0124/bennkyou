@@ -1,21 +1,21 @@
 var app = angular.module("app1",[]);
 
 app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
-    $scope.paths = [];
-    $http.get('pathlist/website.txt').success(function(data){
-      angular.forEach(data,function(item, ind){
-        $scope.paths.push(item);
-      });
-      $scope.selwebsite = $scope.paths[0]; //前面select的用法, 兩個model都是object, 所以預設值也要是object
-      $scope.selstyle = $scope.paths[0].styles[0];
-      $scope.websitechange = function (){ 
-        $scope.selstyle = $scope.selwebsite.styles[0];
-      };
-      $scope.$watch('selstyle', function(){
-        $scope.$broadcast('sendselect',{'website':$scope.selwebsite,'style':$scope.selstyle});
-        //console.log('send:',$scope.selwebsite,' and ',$scope.selstyle);
-      })
-    });
+    // $scope.paths = [];
+    // $http.get('pathlist/website.txt').success(function(data){
+    //   angular.forEach(data,function(item, ind){
+    //     $scope.paths.push(item);
+    //   });
+    //   $scope.selwebsite = $scope.paths[0]; //前面select的用法, 兩個model都是object, 所以預設值也要是object
+    //   $scope.selstyle = $scope.paths[0].styles[0];
+    //   $scope.websitechange = function (){ 
+    //     $scope.selstyle = $scope.selwebsite.styles[0];
+    //   };
+    //   $scope.$watch('selstyle', function(){
+    //     $scope.$broadcast('sendselect',{'website':$scope.selwebsite,'style':$scope.selstyle});
+    //     //console.log('send:',$scope.selwebsite,' and ',$scope.selstyle);
+    //   })
+    // });
     $scope.websites = [];
     $http.get('pathlist/website2.txt').success(function(data){
       angular.forEach(data,function(item, ind){
@@ -23,7 +23,7 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
       });
       $scope.chgwebsite = $scope.websites[0];
       $scope.$watch('chgwebsite', function(newValue, oldValue) {
-        console.log('choose:',$scope.chgwebsite);
+        //console.log('choose:',$scope.chgwebsite);
         $scope.directory = 'filelist/' + $scope.chgwebsite.website + '/000_directory.txt'
         $scope.directorys = [];
         $http.get($scope.directory).success(function(data) {
@@ -31,14 +31,16 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
             $scope.directorys.push(item);
           });
           $scope.chgstyle = $scope.directorys[0];
-          $scope.$watch('chgstyle', function(newValue, oldValue) {
-            $scope.$broadcast('sendselect',{'website':$scope.chgwebsite,'style':$scope.chgstyle}); //往子階層推送變數, 在子階層用on接
-            $scope.$on('SendTotalCount', function(event,data) {
-              console.log('total:',data.totalcount);
-              $scope.totalcount=data.totalcount; //我這是不是一種不合規則的做法? 用這樣送給view?
-            });
-          });
         });
+      });
+      $scope.$watch('chgstyle', function(newValue, oldValue) {
+        if (newValue != undefined && newValue != null) {
+          $scope.$broadcast('sendselect',{'website':$scope.chgwebsite,'style':$scope.chgstyle}); //往子階層推送變數, 在子階層用on接
+          $scope.$on('SendTotalCount', function(event,data) {
+            //console.log('total:',data.totalcount);
+            $scope.totalcount=data.totalcount; //我這是不是一種不合規則的做法? 用這樣送給view?
+          });
+        }
       });
     });
 }]);
@@ -46,15 +48,21 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.$on('sendselect', function(event, data) {
       //console.log('get:',data.website.website,' and ', data.style.style);
-      if (data.website.website == null || data.style.style == null) {
+      if (data.website.website == null || data.style.style == null || data.style.style == undefined) {
         console.log('取不到值');
       }
       else {
         $scope.selwebsite = data.website.website;
-        $scope.selselstyle = data.style.style;
+        $scope.selstyle = data.style.style;
         //console.log('parse:',$scope.selwebsite,' and ',$scope.selselstyle);
+        if ($scope.selstyle.match('white') != null || $scope.selstyle.match('light') != null) {
+          $scope.classid='col_img_size48_bg';
+        }
+        else {
+          $scope.classid='col_img_size48';
+        }
         $scope.items = [];
-        $scope.file = 'filelist/' + $scope.selwebsite + '/' + $scope.selselstyle + '.txt';
+        $scope.file = 'filelist/' + $scope.selwebsite + '/' + $scope.selstyle + '.txt';
         $http.get($scope.file).success(function(data){
           angular.forEach(data,function(item, ind){
             $scope.items.push(item);

@@ -2,8 +2,7 @@
 SETLOCAL ENABLEDELAYEDEXPANSION
 ::不加上面的東西，底下變數處理會壞掉，變數要改為!!
 ::此bat編碼一定要是ANSI，但產生的txt也會是ANSI，內文若非英數，會造成亂碼
-set file=pathlist\website.txt
-echo [ > %file%
+
 for /d %%i IN (filelist\*) DO (
   set directory=%%i
   set directory=!directory:~9!
@@ -22,11 +21,16 @@ for /d %%i IN (filelist\*) DO (
 
   )
   set total=!total!{"website":"!directory!","styles": [!styles:~0,-1!]},
+  set total2=!total2!{"website":"!directory!"},
   echo [!styles:~0,-1!] > !dirlist!
   ::要清除延遲變數，不然會一直加加加上去
   set styles=!styles:~0,0!
 )
-echo !total:~0,-1! >> %file%
-echo ] >> %file%
+IF DEFINED total (
+  echo [!total:~0,-1!] > pathlist\website.txt
+) ELSE echo [] > pathlist\website.txt
+IF DEFINED total2 (
+  echo [!total2:~0,-1!] > pathlist\website2.txt
+) ELSE echo [] > pathlist\website2.txt
 ::沒辦法解決字串2047限制問題
 pause
