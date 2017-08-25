@@ -8,11 +8,11 @@ for /d %%i IN (filelist\*) DO (
   set directory=!directory:~9!
   echo !directory!
   set dirlist=filelist\!directory!\000_directory.txt
-  set path=..\Icon\!directory!\*
-  ::echo !path!
-  for /d %%i IN (!path!) DO (
+  set dirpath=..\Icon\!directory!\*
+  ::echo !dirpath!
+  for /d %%i IN (!dirpath!) DO (
     set subdirtemp=%%i
-    echo !subdirtemp!
+    ::echo !subdirtemp!
     for /F "tokens=1-5 delims=\" %%i IN ('echo !subdirtemp!') DO set subdir_original=%%l
     set subdir=!subdir_original: =_!
     set styles=!styles!{"style":"!subdir!"},

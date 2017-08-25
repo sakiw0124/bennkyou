@@ -1,48 +1,67 @@
 @echo off
 SETLOCAL ENABLEDELAYEDEXPANSION
-for %%i in (*) do (
-    set A-%%i=%%i
-    echo !A-%%i:~0,-2!
-)
 
-::Z:\Picture\素材\Icon\customicondesign.com\customicondesign-cute1\PNG\96\unlock.png
-
-set directory=VistaIcons.com
-set subdir_original=World_Cup_2006_Tux
+echo 試跑產生一個website+style檔案清單
+set directory=customicondesign.com
+::iconspedia.com
+set subdir_original=customicondesign-flatastic4
+::Archigraphs_Comic
 set iconfile=..\..\..\ReviewIcon\filelist\!directory!\!subdir_original!.txt
 cd ..\Icon\!directory!\!subdir_original!\
+::這樣的算法會加入MACOSX內的檔案
+::for /f "tokens=1" %%i in ('dir *.png/s^|find "個檔案"') do set total=%%i
+::兩次迴圈預測很慢
+for /R %%i IN (*.png) DO (
+  set pathtemp=%%~si
+  set macflag=false
+  for /F "usebackq tokens=1" %%i IN (`dir "!pathtemp!"^|find "__MACOSX"`) DO (
+      set key=%%i
+      echo !key!
+      IF DEFINED key (
+         set macflag=true
+      )
+  )
+  IF !macflag! == false (
+    set /A totalcnt=!totalcnt!+1
+  )
+)
+echo Total:!totalcnt!
+
+set /A directcnt=!totalcnt!-50
+echo !directcnt!
+
+echo [ > !iconfile!
 for /R %%i IN (*.png) DO (
   set pathtemp=%%~si
   echo !pathtemp!
+
+  ::不要MAC檔案進來, 原本好白癡呢
   set macflag=false
-  ::不要MAC檔案進來
-  for /F "tokens=1-10 delims=\" %%i IN ("!pathtemp!") DO (
-    IF %%i == __MACOSX set macflag=true
-    IF %%j == __MACOSX set macflag=true
-    IF %%k == __MACOSX set macflag=true
-    IF %%l == __MACOSX set macflag=true
-    IF %%m == __MACOSX set macflag=true
-    IF %%n == __MACOSX set macflag=true
-    IF %%o == __MACOSX set macflag=true
-    IF %%p == __MACOSX set macflag=true
-    IF %%q == __MACOSX set macflag=true
-    IF %%r == __MACOSX set macflag=true
+  for /F "usebackq tokens=1" %%i IN (`dir "!pathtemp!"^|find "__MACOSX"`) DO (
+      set key=%%i
+      echo !key!
+      IF DEFINED key (
+         set macflag=true
+      )
   )
   echo !macflag!
   IF !macflag! == false (
-  echo in
-  set path=!pathtemp:Z:\Picture\素材=..!
-  set path=!path:\=/!
-  set file=%%~nxi
-  set filedata=!filedata!{"header":"!file!","path":"!path!"},
-  set /A cnt=!cnt!+1
+    set filepath=!pathtemp:Z:\Picture\素材=..!
+    set filepath=!filepath:\=/!
+    set file=%%~nxi
+    IF !cnt! LEQ !directcnt! (
+      echo {"header":"!file!","path":"!filepath!"}, >> !iconfile!
+    ) ELSE (
+      ::不可以用path, 採到環境變數的雷了
+      set filedata=!filedata!{"header":"!file!","path":"!filepath!"},
+    )
+    set /A cnt=!cnt!+1
   )
 )
 IF DEFINED filedata (
-  echo [!filedata:~0,-1!] > !iconfile!
-  echo !cnt!
-) ELSE echo [] > !iconfile!
+  echo !filedata:~0,-1! >> !iconfile!
+)
+echo !cnt!
+echo ] >> !iconfile!
 ::沒辦法解決字串2047限制問題
 pause
-
-::call createfilelist.bat "!directory!" "!subdir_original!"

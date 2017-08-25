@@ -7,6 +7,22 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style>
+      .card {
+        width: 100px;
+        height: 100px;
+        font-size: 8px;
+      }
+      .saki {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+      }
+      .col_img_size48 {
+        width: 48px;
+      }
+    </style>
   </head>
   <body ng-app="app1" ng-controller="MainCtrl">
 <!--縣市-->
@@ -15,7 +31,6 @@
 <!-- 區域 -->
 <select name="districtField" ng-model="district" ng-options="c.dName for c in county.districts">
 </select>
-<img src="../Icon/iconspedia.com/qiulook Extra.AdiumIcon/online.png">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <script src="sample1.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
