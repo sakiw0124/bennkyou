@@ -49,15 +49,36 @@
     <div class="container main" ng-controller="PathCtrl">
       <div class="row">
         <div class="col" ng-repeat="item in items">
-          <div class="card">
+          <div class="card {{divclassid}}">
             <div class="card-header" title="{{item.header}}">{{item.header}}</div>
             <div class="card-content">
-              <img class="card-img-top {{classid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}">
+              <img class="card-img-top {{imgclassid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}" data-toggle="modal" data-target="#exampleModal" ng-click="openimg(item)">
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{openimg_header}}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <img class="openimg" ng-src="{{openimg_path}}" ng-alt="{{openimg_header}}" title="{{openimg_path}}">
+                      <div style="padding: 5px">{{openimg_path}}</div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Optional JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <script src="review.js"></script>

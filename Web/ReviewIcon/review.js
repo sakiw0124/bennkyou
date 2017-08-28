@@ -55,11 +55,14 @@ app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.selwebsite = data.website.website;
         $scope.selstyle = data.style.style;
         //console.log('parse:',$scope.selwebsite,' and ',$scope.selselstyle);
-        if ($scope.selstyle.match('white') != null || $scope.selstyle.match('light') != null) {
-          $scope.classid='col_img_size48_bg';
+        $scope.imgclassid='col_img_size48';
+        if ($scope.selstyle.match('white') != null || $scope.selstyle.match('general1-light') != null || 
+            $scope.selstyle.match('general2-light') != null || $scope.selstyle.match('general3-light') != null ||
+            $scope.selstyle.match('general4-light') != null) {
+          $scope.divclassid='card_white';
         }
         else {
-          $scope.classid='col_img_size48';
+          $scope.divclassid='';
         }
         $scope.items = [];
         $scope.file = 'filelist/' + $scope.selwebsite + '/' + $scope.selstyle + '.txt';
@@ -74,4 +77,8 @@ app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
         });
       }
     });
+    $scope.openimg = function (item) {
+      $scope.openimg_header = item.header;
+      $scope.openimg_path = item.path;
+    };
 }]);
