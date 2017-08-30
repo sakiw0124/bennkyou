@@ -3,7 +3,7 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 ::用來產生新的一個網站資料夾內所有Style的檔案清單，要先把website資料夾建立起來
 ::為了website.txt這個檔，還是需要跑dirpath的迴圈，假使用website2.txt就可以不跑省時間
 
-set dodirectory=freeiconsdownload.com
+set dodirectory=iconshock.com
 
 for /d %%i IN (filelist\*) DO (
   set directory=%%i

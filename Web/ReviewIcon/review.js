@@ -82,3 +82,12 @@ app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
       $scope.openimg_path = item.path;
     };
 }]);
+
+app.filter('strReplace', function () {
+  return function (input, from, to) {
+    input = input || '';
+    from = from || '';
+    to = to || '';
+    return input.replace(new RegExp(from, 'g'), to);
+  };
+});

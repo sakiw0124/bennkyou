@@ -28,7 +28,7 @@
         <select class="custom-select" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
         <span style="padding-left: 5px"></span>
         <select class="custom-select" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
-        <span style="padding-left: 5px"></span><span class="badge badge-info">{{totalcount}}</span>
+        <span style="padding-left: 5px"></span><span class="badge badge-info" ng-bind="totalcount"></span>
       </div>
       <!--
       <div class="btn-group">
@@ -46,7 +46,7 @@
       </div>
       -->
     </div>
-    <div class="container main" ng-controller="PathCtrl">
+    <div class="container" ng-controller="PathCtrl">
       <div class="row">
         <div class="col" ng-repeat="item in items">
           <div class="card {{divclassid}}">
@@ -65,7 +65,7 @@
                     </div>
                     <div class="modal-body">
                       <img class="openimg" ng-src="{{openimg_path}}" ng-alt="{{openimg_header}}" title="{{openimg_path}}">
-                      <div style="padding: 5px">{{openimg_path}}</div>
+                      <div style="padding: 5px">{{ openimg_path | strReplace:'/':'\\' }}</div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -10,10 +10,6 @@ body {
     top: 0;
     z-index: 1071;
 }
-.main {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 .custom-select {
     color: #9EA7AE;
     border-color: #79ADAF;
