@@ -10,6 +10,12 @@ body {
     top: 0;
     z-index: 1071;
 }
+.modal.show {
+    z-index: 1073;
+}
+.modal-backdrop {
+    z-index:1072;
+}
 .custom-select {
     color: #9EA7AE;
     border-color: #79ADAF;
@@ -72,9 +78,6 @@ body {
 }
 .openimg {
     max-width: 450px;
-}
-.modal.show {
-    z-index: 1072;
 }
 
 /*之後用不到刪了*/
