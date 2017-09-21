@@ -10,26 +10,28 @@
     <link rel="stylesheet" href="review.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
   </head>
+    <!--碰到極大的困難-->
+    <!--1.怎麽動態產生dropdown的選項: 第一個dropdown的選項抓一個txt內資料, watch他改變, 抓取第二層的txt, 兩個選項製作方式一樣, 只是用watch來及時改變第二層, 也可以用ng-click-->
+    <!--2.怎麽即時讀取電腦或檔案的資料夾跟檔案進來: Chrome有安全性考量，必須右鍵內容加參數 \-\-allow-file-access-from-files-->
+    <!--3.不能即時讀取目錄，是不是可以讀文檔，但要怎麽解析成資料夾與檔案: 目前用$http.get，但似乎不能用絕對路徑，目前產生工具必須放置於適當位置-->
+    <!--4.怎麽repeat圖檔顯示: 解決-->
+    <!--5.怎麼讓選項點了以後，去重新產生iconfile呈現: 跟3.一樣用watch第二層目錄, 抓取第三層icon的txt資料, repeat呈現, 注意我有兩個controller互相傳遞變數, 8.處理-->
+    <!--6.如果資料結構是有子陣列的，不知道要怎麼讓選項可以出現: 參考sample1我好像繞了大半圈，甚麼filter都不用?-->
+    <!--7.不知道怎麽讓選項可以回到controller去處理: 同上，不需要-->
+    <!--8.怎麽把選擇的值放到另一個controller: broadcast & on-->
+    <!--9.這裡用的select導致資料格式好奇怪，怎麼變純字串，js一層層好白癡: 還沒搞懂傳遞出來的變數為什麼變成object-->
   <body ng-app="app1" ng-controller="MainCtrl">
     <div class="webtitle border border-light border-top-0 border-left-0 border-right-0">
-      <h3><i class="fa fa-id-card-o" aria-hidden="true"></i> Hello, Icon!</h3>
-      <!--碰到極大的困難-->
-      <!--怎麽動態產生dropdown的選項，第一個dropdown的選項(iconurl)可以寫死，第二個dropdown的選項(iconfolder)怎麽動態-->
-      <!--怎麽即時讀取電腦或檔案的資料夾跟檔案進來: Chrome有安全性考量，必須右鍵內容加參數 \-\-allow-file-access-from-files-->
-      <!--不能即時讀取，是不是可以讀文檔，但要怎麽解析成資料夾與檔案: 目前用$http.get，但似乎不能用絕對路徑，目前工具必須放置於適當位置-->
-      <!--怎麽repeat圖檔顯示: 解決-->
-      <!--怎麼讓選項點了以後，去重新產生iconfile呈現-->
-      <!--如果資料結構是有子陣列的，不知道要怎麼讓選項可以出現: 參考sample1我好像繞了大半圈，甚麼filter都不用?-->
-      <!--不知道怎麽讓選項可以回到controller去處理: 同上，不需要-->
-      <!--怎麽把選擇的值放到另一個controller: broadcast & on-->
-      <!--這裡用的select導致資料格式好奇怪，怎麼變純字串，js一層層好白癡-->
-      <!-- Example single danger button -->
+      <h3><i class="fa fa-user-secret" aria-hidden="true"></i> ...</h3>
       <div class="btn-group">
         <select class="custom-select" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
         <span style="padding-left: 5px"></span>
         <select class="custom-select" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
         <span style="padding-left: 5px"></span><span class="badge badge-info" ng-bind="totalcount"></span>
+        <span style="padding-left: 5px"></span>
+        <span><button type="button" class="btn {{sorticon}}" ng-click="changesorting()"></button></span>
       </div>
+      <!-- Example single danger button -->
       <!--
       <div class="btn-group">
         <div style="padding-right: 10px;" ng-repeat="item in paths">
@@ -48,30 +50,40 @@
     </div>
     <div class="container" ng-controller="PathCtrl">
       <div class="row">
-        <div class="col" ng-repeat="item in items">
+        <div class="col" ng-if="sortfield === null || sortfield === undefined || sortfield ===''" ng-repeat="item in items">
           <div class="card {{divclassid}}">
             <div class="card-header" title="{{item.header}}">{{item.header}}</div>
             <div class="card-content">
-              <img class="card-img-top {{imgclassid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}" data-toggle="modal" data-target="#exampleModal" ng-click="openimg(item)">
-              <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">{{openimg_header}}</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <img class="openimg" ng-src="{{openimg_path}}" ng-alt="{{openimg_header}}" title="{{openimg_path}}">
-                      <div style="padding: 5px">{{ openimg_path | strReplace:'/':'\\' }}</div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
+              <img class="card-img-top {{imgclassid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}" data-toggle="modal" data-target="#exampleModal" ng-click="openimg(item,divclassid)">
+            </div>
+          </div>
+        </div>
+        <div class="col" ng-if="sortfield != null" ng-repeat="item in items | orderBy:'header':direction">
+          <div class="card {{divclassid}}">
+            <div class="card-header" title="{{item.header}}">{{item.header}}</div>
+            <div class="card-content">
+              <img class="card-img-top {{imgclassid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}" data-toggle="modal" data-target="#exampleModal" ng-click="openimg(item,divclassid)">
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{openimg_header}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="openimg {{openimg_classid}}">
+                   <img class="{{openimg_classid}}" ng-src="{{openimg_path}}" ng-alt="{{openimg_header}}" title="{{openimg_path}}">
                 </div>
+                <div class="openimg_path">{{ openimg_path | strReplace:'/':'\\' }}</div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>

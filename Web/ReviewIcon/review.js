@@ -17,6 +17,7 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     //   })
     // });
     $scope.websites = [];
+    $scope.sorticon = "fa fa-sort";
     $http.get('pathlist/website2.txt').success(function(data){
       angular.forEach(data,function(item, ind){
         $scope.websites.push(item);
@@ -42,6 +43,39 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
           });
         }
       });
+      $scope.changesorting = function () {
+        console.log('in changesorting()');
+        if ($scope.flag == null) {
+          $scope.flag = 'B';
+        }
+        //switch這東西是每個case都會跑過檢查, 所以正確就要break出去
+        switch ($scope.flag) {
+          case 'A':
+            $scope.sortfield = "";
+            $scope.direction = "";
+            $scope.sorticon = "fa fa-sort";
+            $scope.flag = 'B';
+            break;
+          case 'B':
+            $scope.sortfield = "header";
+            $scope.direction = 0;
+            $scope.sorticon = "fa fa-sort-desc";
+            $scope.flag = 'C';
+            break;
+          case 'C':
+            $scope.sortfield = "header";
+            $scope.direction = 1;
+            $scope.sorticon = "fa fa-sort-asc";
+            $scope.flag = 'A';
+            break;
+          default:
+            $scope.sortfield = "";
+            $scope.direction = "";
+            $scope.sorticon = "fa fa-sort";
+            $scope.flag = 'B';
+            break;
+        };
+      };
     });
 }]);
 
@@ -77,9 +111,10 @@ app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
         });
       }
     });
-    $scope.openimg = function (item) {
+    $scope.openimg = function (item,classid) {
       $scope.openimg_header = item.header;
       $scope.openimg_path = item.path;
+      $scope.openimg_classid = classid;
     };
 }]);
 

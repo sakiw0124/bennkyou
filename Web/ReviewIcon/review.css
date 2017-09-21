@@ -1,14 +1,23 @@
 body {
     width: 100%;
     font-family: Consolas, 微軟正黑體;
+    background-color: #f1e0d6;
 }
 .webtitle {
     padding: 20px;
-    background-color: #EDEAE1;
-    color: #A6B07B;
+    background-image: url("image/webtitle.png");
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-size: 1920px;
+    background-color: #595775;
+    color: #FFFFFF;
     position: sticky;
     top: 0;
     z-index: 1071;
+    text-align: center;
+}
+h3 {
+    text-align: right;
 }
 .modal.show {
     z-index: 1073;
@@ -16,30 +25,35 @@ body {
 .modal-backdrop {
     z-index:1072;
 }
+.modal-header {
+    border-bottom: 0px;
+}
+.modal-footer {
+    border-top: 0px;
+}
 .custom-select {
-    color: #9EA7AE;
-    border-color: #79ADAF;
+    color: #595775;
+    border-color: #aba6bf;
     background-size: 5px 10px;
+}
+.btn {
+    height: 100%;
+    background-color: #bf988f;
+    border-color: #bf988f;
+    color: #ffffff;
 }
 .card {
     width: 100px;
     height: 100px;
-}
-.card_white {
-    border: 1px solid #DFDFDF;
-    background-color: #79ADAF;
-}
-.col {
-    padding: 5px;
-    flex-grow: 0;
+    border-color: #aba6bf;
 }
 .card-header {
     font-size: 8px;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
-    background-color: #F7F7F7;
-    border-bottom: 1px solid #DFDFDF;
+    background-color: #EAD9D5;
+    border-bottom: 1px solid #aba6bf;
 }
 .card-content {
     text-align: center;
@@ -49,85 +63,33 @@ body {
     text-overflow:ellipsis;
     white-space: nowrap;
 }
-.col_img_size16 {
-    width: 16px;
+.card_white {
+    background-color: #bf988f;
 }
-.col_img_size24 {
-    width: 24px;
-}
-.col_img_size32 {
-    width: 32px;
+.col {
+    padding: 5px;
+    flex-grow: 0;
 }
 .col_img_size48 {
     width: 48px;
     cursor: pointer;
 }
-.col_img_size64 {
-    width: 64px;
-}
-.col_img_size128 {
-    width: 128px;
-}
-.col_img_size256 {
-    width: 256px;
-}
 .badge {
     padding-top: 10px;
     font-size: 100%;
-    background-color: #9FD38D;
+    background-color: #bf988f;
 }
 .openimg {
+    border-radius: .25rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+.openimg img {
     max-width: 450px;
 }
-
-/*之後用不到刪了*/
-.btn-1 {
-    color: #FFFFFF;
-    background-color: #113F8C;
-    border-color: #113F8C;
-}
-.btn-2 {
-    color: #FFFFFF;
-    background-color: #01A4A4;
-    border-color: #01A4A4;
-}
-.btn-3 {
-    color: #FFFFFF;
-    background-color: #00A1CB;
-    border-color: #00A1CB;
-}
-.btn-4 {
-    color: #FFFFFF;
-    background-color: #61AE24;
-    border-color: #61AE24;
-}
-.btn-5 {
-    color: #FFFFFF;
-    background-color: #D0D102;
-    border-color: #D0D102;
-}
-.btn-6 {
-    color: #FFFFFF;
-    background-color: #32742C;
-    border-color: #32742C;
-}
-.btn-7 {
-    color: #FFFFFF;
-    background-color: #D70060;
-    border-color: #D70060;
-}
-.btn-8 {
-    color: #FFFFFF;
-    background-color: #E54028;
-    border-color: #E54028;
-}
-.btn-9 {
-    color: #FFFFFF;
-    background-color: #F18D05;
-    border-color: #F18D05;
-}
-.btn-10 {
-    color: #FFFFFF;
-    background-color: #616161;
-    border-color: #616161;
+.openimg_path {
+    padding: 5px;
+    font-size: 8px;
+    text-align: center;
 }
