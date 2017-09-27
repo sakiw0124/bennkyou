@@ -59,13 +59,13 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
           case 'B':
             $scope.sortfield = "header";
             $scope.direction = 0;
-            $scope.sorticon = "fa fa-sort-desc";
+            $scope.sorticon = "fa fa-sort-alpha-asc";
             $scope.flag = 'C';
             break;
           case 'C':
             $scope.sortfield = "header";
             $scope.direction = 1;
-            $scope.sorticon = "fa fa-sort-asc";
+            $scope.sorticon = "fa fa-sort-alpha-desc";
             $scope.flag = 'A';
             break;
           default:
@@ -75,6 +75,9 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
             $scope.flag = 'B';
             break;
         };
+      };
+      $scope.clearkeyword = function () {
+        $scope.keyword = "";
       };
     });
 }]);

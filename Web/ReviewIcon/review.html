@@ -22,14 +22,27 @@
     <!--9.這裡用的select導致資料格式好奇怪，怎麼變純字串，js一層層好白癡: 還沒搞懂傳遞出來的變數為什麼變成object-->
   <body ng-app="app1" ng-controller="MainCtrl">
     <div class="webtitle border border-light border-top-0 border-left-0 border-right-0">
-      <h3><i class="fa fa-user-secret" aria-hidden="true"></i> ...</h3>
-      <div class="btn-group">
-        <select class="custom-select" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
-        <span style="padding-left: 5px"></span>
-        <select class="custom-select" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
-        <span style="padding-left: 5px"></span><span class="badge badge-info" ng-bind="totalcount"></span>
-        <span style="padding-left: 5px"></span>
-        <span><button type="button" class="btn {{sorticon}}" ng-click="changesorting()"></button></span>
+      <div class="colgroup">
+        <div style="width: 30%;">
+          <select class="custom-select" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
+        </div>
+        <div style="width: 60%;">
+          <select class="custom-select" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
+        </div>
+        <div style="width: 5%;">
+          <span class="badge badge-info" ng-bind="totalcount"></span>
+        </div>
+        <div style="width: 5%;">
+          <button type="button" class="btn {{sorticon}}" ng-click="changesorting()"></button>
+        </div>
+        <div style="width: 100%;">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." ng-model="keyword">
+            <span class="input-group-btn">
+              <button class="btn btn-secondary" type="button" ng-click="clearkeyword()"><i class="fa fa-bath" aria-hidden="true"></i></button>
+            </span>
+          </div>
+        </div>
       </div>
       <!-- Example single danger button -->
       <!--
@@ -50,7 +63,7 @@
     </div>
     <div class="container" ng-controller="PathCtrl">
       <div class="row">
-        <div class="col" ng-if="sortfield === null || sortfield === undefined || sortfield ===''" ng-repeat="item in items">
+        <div class="col" ng-if="sortfield === null || sortfield === undefined || sortfield === ''" ng-repeat="item in items | filter:{header:keyword} | limitTo:1000 ">
           <div class="card {{divclassid}}">
             <div class="card-header" title="{{item.header}}">{{item.header}}</div>
             <div class="card-content">
@@ -58,7 +71,7 @@
             </div>
           </div>
         </div>
-        <div class="col" ng-if="sortfield != null" ng-repeat="item in items | orderBy:'header':direction">
+        <div class="col" ng-if="sortfield !== null && sortfield !== undefined && sortfield !== ''" ng-repeat="item in items | orderBy:'header':direction | filter:{header:keyword} | limitTo:1000">
           <div class="card {{divclassid}}">
             <div class="card-header" title="{{item.header}}">{{item.header}}</div>
             <div class="card-content">

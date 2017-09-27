@@ -16,8 +16,26 @@ body {
     z-index: 1071;
     text-align: center;
 }
-h3 {
-    text-align: right;
+.colgroup {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 70%;
+}
+.colgroup div {
+    padding-bottom: 1px;
+    padding-right: 3px;
+}
+.form-control {
+    border-color: #aba6bf;
+}
+.container {
+    max-width: 100%;
+    max-height: calc(100Vh - 130px);
+    overflow-y: auto;
+}
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 .modal.show {
     z-index: 1073;
@@ -35,6 +53,7 @@ h3 {
     color: #595775;
     border-color: #aba6bf;
     background-size: 5px 10px;
+    width: 100%;
 }
 .btn {
     height: 100%;
@@ -70,14 +89,21 @@ h3 {
     padding: 5px;
     flex-grow: 0;
 }
+.col-10, .col-7, .col-4, .col-1 {
+    padding-left: 2px;
+    padding-right: 2px;
+    max-width: 40%;
+}
 .col_img_size48 {
     width: 48px;
     cursor: pointer;
 }
 .badge {
-    padding-top: 10px;
-    font-size: 100%;
+    padding: 10px 0px;
+    font-size: 11pt;
     background-color: #bf988f;
+    height: 100%;
+    width: 100%;
 }
 .openimg {
     border-radius: .25rem;
