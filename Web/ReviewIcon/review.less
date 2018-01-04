@@ -1,0 +1,213 @@
+@stylecnt: 11;
+.pageloop(@counter) when (@counter > 0){
+  .pageloop((@counter - 1));
+  @1: #F6E6D9;
+  @2: #EEDED0;
+  @3: #FBEAC7;
+  @4: #D2DDC7;
+  @5: #D4E0DD;
+  @6: #E4E0F0;
+  @7: #BBBBBB;
+  @8: #DBDBDB;
+  @9: #DEECDD;
+  @10: #f1e0d6;
+  @11: #b0d1e5;
+  .page-bg-s@{counter}{
+    background: @@counter;
+  }
+}
+.webtitleloop(@counter) when (@counter > 0){
+  .webtitleloop((@counter - 1));
+  @1: #EB7A77;
+  @2: #FB9966;
+  @3: #EFBB24;
+  @4: #91AD70;
+  @5: #6699A1;
+  @6: #9B90C2;
+  @7: #333333;
+  @8: #6c6b74;
+  @9: #756F52;
+  @10: #595775;
+  @11: #192E5B;
+  .webtitle-s@{counter}{
+    background-color: @@counter;
+  }
+}
+.badgeloop(@counter) when (@counter > 0){
+  .badgeloop((@counter - 1));
+  @1: #75686B;
+  @2: #8F818B;
+  @3: #68764B;
+  @4: #8D8B73;
+  @5: #AE9F89;
+  @6: #778786;
+  @7: #777777;
+  @8: #54678f;
+  @9: #B5945F;
+  @10: #595775;
+  @11: #1d65a6;
+  .input-border-s@{counter}{
+    // color: @@counter;
+    border-color: @@counter;
+  }
+  .badge-s@{counter}{
+    background-color: @@counter;
+  }
+  .btn-s@{counter}{
+    background-color: @@counter;
+    border-color: @@counter;
+  }
+}
+.cardloop(@counter) when (@counter > 0){
+  .cardloop((@counter - 1));
+  @1: #D7C4BB;
+  @2: #CFC1C0;
+  @3: #D2CD69;
+  @4: #B5CAA0;
+  @5: #81C7D4;
+  @6: #C3D1CB;
+  @7: #999999;
+  @8: #9199be;
+  @9: #C5C191;
+  @10: #EAD9D5;
+  @11: #72a2c0;
+  .card-header-s@{counter}{
+    background-color: @@counter;
+  }
+  .card-white-s@{counter}{
+    background-color: @@counter;
+  }
+}
+// .whitecardloop(@counter) when (@counter > 0){
+//   .whitecardloop((@counter - 1));
+//   @1: #4B4149;
+//   @2: #4B4656;
+//   @3: #3E3936;
+//   @4: #745D4A;
+//   @5: #855A5B;
+//   @6: #525A57;
+//   @7: #B0E0E6;
+//   @8: #646b74;
+//   @9: #C5C191;
+//   @10: #bf988f;
+//   @11: #f2a104;
+//   .card-white-s@{counter}{
+//     background-color: @@counter;
+//   }
+// }
+
+
+body {
+  width: 100%;
+  font-family: Consolas, 微軟正黑體;
+}
+.pageloop(@stylecnt);
+.webtitle {
+  padding: 20px;
+  background-image: url("../ReviewIcon/image/webtitle.png");
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  background-size: 1920px;
+  // background-size: image-width('../images/webtitle.png');
+  background-color: #000000;
+  color: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 1071;
+  text-align: center;
+}
+.webtitleloop(@stylecnt);
+.colgroup {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 70%;
+}
+.colgroup div {
+  padding-bottom: 1px;
+  padding-right: 3px;
+}
+.container {
+  max-width: 100%;
+  height: ~"calc(100Vh - 120px)";  /*這裡的100Vh-120px直接寫會被計算掉*/
+  overflow-y: auto;
+}
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.modal.show {
+  z-index: 1073;
+}
+.modal-backdrop {
+  z-index:1072;
+}
+.modal-header {
+  border-bottom: 0px;
+}
+.modal-footer {
+  border-top: 0px;
+}
+.custom-select {
+  color: #828282;
+  border-color: #000000;
+  background-size: 5px 10px;
+  width: 100%;
+}
+.form-control:focus {
+  color: #828282;
+}
+.badge {
+  padding: 10px 0px;
+  font-size: 11pt;
+  height: 100%;
+  width: 100%;
+}
+.btn {
+  height: 100%;
+  color: #ffffff;
+}
+.badgeloop(@stylecnt);
+.card {
+  width: 100px;
+  height: 100px;
+  border: 0px;
+}
+.card-header {
+  font-size: 8px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  border-bottom: 0px;
+}
+.cardloop(@stylecnt);
+.card-content {
+  text-align: center;
+  padding-top: 5px;
+  font-size: 6px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+// .whitecardloop(@stylecnt);
+.col {
+  padding: 10px;
+  flex-grow: 0;
+}
+.col_img_size48 {
+  width: 48px;
+  cursor: pointer;
+}
+.openimg {
+  border-radius: .25rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+.openimg img {
+  max-width: 450px;
+}
+.openimg_path {
+  padding: 5px;
+  font-size: 8px;
+  text-align: center;
+}

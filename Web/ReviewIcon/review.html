@@ -7,8 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="review.css">
+    <!-- <link rel="stylesheet" href="review.css"> -->
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet/less" type="text/css" href="review.less" />
   </head>
     <!--碰到極大的困難-->
     <!--1.怎麽動態產生dropdown的選項: 第一個dropdown的選項抓一個txt內資料, watch他改變, 抓取第二層的txt, 兩個選項製作方式一樣, 只是用watch來及時改變第二層, 也可以用ng-click-->
@@ -20,28 +21,43 @@
     <!--7.不知道怎麽讓選項可以回到controller去處理: 同上，不需要-->
     <!--8.怎麽把選擇的值放到另一個controller: broadcast & on-->
     <!--9.這裡用的select導致資料格式好奇怪，怎麼變純字串，js一層層好白癡: 還沒搞懂傳遞出來的變數為什麼變成object-->
-  <body ng-app="app1" ng-controller="MainCtrl">
-    <div class="webtitle border border-light border-top-0 border-left-0 border-right-0">
+  <body ng-app="app1" ng-controller="MainCtrl" class="page-bg-{{choosestyle}}">
+    <div class="webtitle webtitle-{{choosestyle}} border border-light border-top-0 border-left-0 border-right-0">
       <div class="colgroup">
         <div style="width: 30%;">
-          <select class="custom-select" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
+          <select class="custom-select input-border-{{choosestyle}}" ng-model="chgwebsite" ng-options="item.website for item in websites"></select>
         </div>
         <div style="width: 60%;">
-          <select class="custom-select" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
+          <select class="custom-select input-border-{{choosestyle}}" ng-model="chgstyle" ng-options="item.style for item in directorys"></select>
         </div>
         <div style="width: 5%;">
-          <span class="badge badge-info" ng-bind="totalcount"></span>
+          <span class="badge badge-secondary badge-{{choosestyle}}" ng-bind="totalcount"></span>
         </div>
         <div style="width: 5%;">
-          <button type="button" class="btn {{sorticon}}" ng-click="changesorting()"></button>
+          <button type="button" class="btn btn-secondary btn-{{choosestyle}} {{sorticon}}" ng-click="changesorting()"></button>
         </div>
-        <div style="width: 100%;">
+        <div style="width: 80%;">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." ng-model="keyword">
+            <input type="text" class="form-control input-border-{{choosestyle}}" placeholder="Search for..." aria-label="Search for..." ng-model="keyword">
             <span class="input-group-btn">
-              <button class="btn btn-secondary" type="button" ng-click="clearkeyword()"><i class="fa fa-bath" aria-hidden="true"></i></button>
+              <button class="btn btn-secondary btn-{{choosestyle}}" type="button" ng-click="clearkeyword()"><i class="fa fa-bath" aria-hidden="true"></i></button>
             </span>
           </div>
+        </div>
+        <div style="width: 20%;">
+          <select class="custom-select input-border-{{choosestyle}}" ng-model="choosestyle">
+            <option value="s1">01. 紅紅的</option>
+            <option value="s2">02. 橘橘的</option>
+            <option value="s3">03. 黃黃的</option>
+            <option value="s4">04. 綠綠的</option>
+            <option value="s5">05. 藍藍的</option>
+            <option value="s6">06. 紫紫的</option>
+            <option value="s7">07. 黑黑的</option>
+            <option value="s8">08. 哥德式建築</option>
+            <option value="s9">09. 小綠</option>
+            <option value="s10">10. 地中海藍</option>
+            <option value="s11">11. 異國蘭花</option>
+          </select>
         </div>
       </div>
       <!-- Example single danger button -->
@@ -64,16 +80,16 @@
     <div class="container" ng-controller="PathCtrl">
       <div class="row">
         <div class="col" ng-if="sortfield === null || sortfield === undefined || sortfield === ''" ng-repeat="item in items | filter:{header:keyword} | limitTo:1000 ">
-          <div class="card {{divclassid}}">
-            <div class="card-header" title="{{item.header}}">{{item.header}}</div>
+          <div class="card card-border-{{choosestyle}} {{divclassid}}-{{choosestyle}}">
+            <div class="card-header card-header-{{choosestyle}}" title="{{item.header}}" ng-bind="item.header"></div>
             <div class="card-content">
               <img class="card-img-top {{imgclassid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}" data-toggle="modal" data-target="#exampleModal" ng-click="openimg(item,divclassid)">
             </div>
           </div>
         </div>
         <div class="col" ng-if="sortfield !== null && sortfield !== undefined && sortfield !== ''" ng-repeat="item in items | orderBy:'header':direction | filter:{header:keyword} | limitTo:1000">
-          <div class="card {{divclassid}}">
-            <div class="card-header" title="{{item.header}}">{{item.header}}</div>
+          <div class="card card-border-{{choosestyle}} {{divclassid}}-{{choosestyle}}">
+            <div class="card-header card-header-{{choosestyle}}" title="{{item.header}}" ng-bind="item.header"></div>
             <div class="card-content">
               <img class="card-img-top {{imgclassid}}" ng-src="{{item.path}}" ng-alt="{{item.header}}" title="{{item.path}}" data-toggle="modal" data-target="#exampleModal" ng-click="openimg(item,divclassid)">
             </div>
@@ -84,19 +100,19 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{openimg_header}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel" ng-bind="openimg_header"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <div class="openimg {{openimg_classid}}">
+                <div class="openimg {{openimg_classid}}-{{choosestyle}}">
                    <img class="{{openimg_classid}}" ng-src="{{openimg_path}}" ng-alt="{{openimg_header}}" title="{{openimg_path}}">
                 </div>
-                <div class="openimg_path">{{ openimg_path | strReplace:'/':'\\' }}</div>
+                <div class="openimg_path" ng-bind="openimg_path | strReplace:'/':'\\'"></div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-{{choosestyle}}" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -111,5 +127,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="js/less.min.js" type="text/javascript"></script>
   </body>
 </html>

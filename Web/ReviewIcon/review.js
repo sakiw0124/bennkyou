@@ -18,6 +18,7 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     // });
     $scope.websites = [];
     $scope.sorticon = "fa fa-sort";
+    $scope.choosestyle = "s"+new Date().getDay();
     $http.get('pathlist/website2.txt').success(function(data){
       angular.forEach(data,function(item, ind){
         $scope.websites.push(item);
@@ -43,36 +44,36 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
           });
         }
       });
+      var flag;
       $scope.changesorting = function () {
-        console.log('in changesorting()');
-        if ($scope.flag == null) {
-          $scope.flag = 'B';
+        if (flag == null) {
+          flag = 'B';
         }
         //switch這東西是每個case都會跑過檢查, 所以正確就要break出去
-        switch ($scope.flag) {
+        switch (flag) {
           case 'A':
             $scope.sortfield = "";
             $scope.direction = "";
             $scope.sorticon = "fa fa-sort";
-            $scope.flag = 'B';
+            flag = 'B';
             break;
           case 'B':
             $scope.sortfield = "header";
             $scope.direction = 0;
             $scope.sorticon = "fa fa-sort-alpha-asc";
-            $scope.flag = 'C';
+            flag = 'C';
             break;
           case 'C':
             $scope.sortfield = "header";
             $scope.direction = 1;
             $scope.sorticon = "fa fa-sort-alpha-desc";
-            $scope.flag = 'A';
+            flag = 'A';
             break;
           default:
             $scope.sortfield = "";
             $scope.direction = "";
             $scope.sorticon = "fa fa-sort";
-            $scope.flag = 'B';
+            flag = 'B';
             break;
         };
       };
@@ -96,7 +97,7 @@ app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
         if ($scope.selstyle.match('white') != null || $scope.selstyle.match('general1-light') != null || 
             $scope.selstyle.match('general2-light') != null || $scope.selstyle.match('general3-light') != null ||
             $scope.selstyle.match('general4-light') != null) {
-          $scope.divclassid='card_white';
+          $scope.divclassid='card-white';
         }
         else {
           $scope.divclassid='';
