@@ -19,25 +19,25 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.websites = [];
     $scope.sorticon = "fa fa-sort";
     $scope.choosestyle = "s"+new Date().getDay();
-    $http.get('pathlist/website2.txt').success(function(data){
+    $http.get('pathlist/website2.json').success(function(data){
       angular.forEach(data,function(item, ind){
         $scope.websites.push(item);
       });
       $scope.chgwebsite = $scope.websites[0];
       $scope.$watch('chgwebsite', function(newValue, oldValue) {
         //console.log('choose:',$scope.chgwebsite);
-        $scope.directory = 'filelist/' + $scope.chgwebsite.website + '/000_directory.txt'
+        $scope.directory = 'filelist/' + $scope.chgwebsite.website + '/000_directory.json'
         $scope.directorys = [];
         $http.get($scope.directory).success(function(data) {
           angular.forEach(data,function(item, ind){
             $scope.directorys.push(item);
           });
-          $scope.chgstyle = $scope.directorys[0];
+          $scope.chgseries = $scope.directorys[0];
         });
       });
-      $scope.$watch('chgstyle', function(newValue, oldValue) {
+      $scope.$watch('chgseries', function(newValue, oldValue) {
         if (newValue != undefined && newValue != null) {
-          $scope.$broadcast('sendselect',{'website':$scope.chgwebsite,'style':$scope.chgstyle}); //往子階層推送變數, 在子階層用on接
+          $scope.$broadcast('sendselect',{'website':$scope.chgwebsite,'series':$scope.chgseries}); //往子階層推送變數, 在子階層用on接
           $scope.$on('SendTotalCount', function(event,data) {
             //console.log('total:',data.totalcount);
             $scope.totalcount=data.totalcount; //我這是不是一種不合規則的做法? 用這樣送給view?
@@ -86,24 +86,24 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 app.controller('PathCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.$on('sendselect', function(event, data) {
       //console.log('get:',data.website.website,' and ', data.style.style);
-      if (data.website.website == null || data.style.style == null || data.style.style == undefined) {
+      if (data.website.website == null || data.series.series == null || data.series.series == undefined) {
         console.log('取不到值');
       }
       else {
         $scope.selwebsite = data.website.website;
-        $scope.selstyle = data.style.style;
+        $scope.selseries = data.series.series;
         //console.log('parse:',$scope.selwebsite,' and ',$scope.selselstyle);
         $scope.imgclassid='col_img_size48';
-        if ($scope.selstyle.match('white') != null || $scope.selstyle.match('general1-light') != null || 
-            $scope.selstyle.match('general2-light') != null || $scope.selstyle.match('general3-light') != null ||
-            $scope.selstyle.match('general4-light') != null) {
+        if ($scope.selseries.match('white') != null || $scope.selseries.match('general1-light') != null || 
+            $scope.selseries.match('general2-light') != null || $scope.selseries.match('general3-light') != null ||
+            $scope.selseries.match('general4-light') != null) {
           $scope.divclassid='card-white';
         }
         else {
           $scope.divclassid='';
         }
         $scope.items = [];
-        $scope.file = 'filelist/' + $scope.selwebsite + '/' + $scope.selstyle + '.txt';
+        $scope.file = 'filelist/' + $scope.selwebsite + '/' + $scope.selseries + '.json';
         $http.get($scope.file).success(function(data){
           angular.forEach(data,function(item, ind){
             $scope.items.push(item);

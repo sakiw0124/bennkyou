@@ -11,3 +11,4 @@
 #	舊方法（effo.txt）花8m14s4ms
 #	Start:16:06:51.80
 #	End:16:15:06.20
+#配合angular2專案，資料清單從txt改為json；style改為series

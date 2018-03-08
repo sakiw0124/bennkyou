@@ -5,7 +5,7 @@ set directory=%1
 set subdir_original=%2
 ::echo !directory! !subdir_original!
 set subdir=!subdir_original: =_!
-set iconfile=..\..\..\ReviewIcon\filelist\!directory!\!subdir!.txt
+set iconfile=..\..\..\ReviewIcon\filelist\!directory!\!subdir!.json
 cd ..\Icon\!directory!\!subdir_original!\
 
 ::第一圈算出有多少檔案,才能分開直接寫與50個以內組字串寫
@@ -35,4 +35,4 @@ IF DEFINED filedata (
   echo !filedata:~0,-1! >> !iconfile!
 )
 echo ] >> !iconfile!
-::以上可以解決字串2047限制問題（分大小用不同方式寫入txt）
+::以上可以解決字串2047限制問題（分大小用不同方式寫入json）

@@ -1,10 +1,10 @@
 @echo off
 SETLOCAL ENABLEDELAYEDEXPANSION
-::產生一個website+style檔案清單，但前提是這個style已經存在000_directory.txt裡面
+::產生一個website+series檔案清單，但前提是這個series已經存在000_directory.json裡面
 
-set directory=Fasticon.com
-set subdir_original=isimple_vector
-set iconfile=..\..\..\ReviewIcon\filelist\!directory!\!subdir_original!.txt
+set directory=Collection
+set subdir_original=diagram
+set iconfile=..\..\..\ReviewIcon\filelist\!directory!\!subdir_original!.json
 cd ..\Icon\!directory!\!subdir_original!\
 ::第一圈算出有多少檔案,才能分開直接寫與50個以內組字串寫
 for /F "usebackq tokens=1" %%i IN (`dir /S/B *.png^|find /V "__MACOSX"`) DO (
@@ -34,5 +34,5 @@ IF DEFINED filedata (
   echo !filedata:~0,-1! >> !iconfile!
 )
 echo ] >> !iconfile!
-::以上可以解決字串2047限制問題（分大小用不同方式寫入txt）
+::以上可以解決字串2047限制問題（分大小用不同方式寫入json）
 pause
