@@ -23,3 +23,6 @@ robamcmd.bat直接從指令找出路由，自動寫入執行檔robamroute.bat
 20170815 Web
 找到一個FastStone可以取代ACDsee，只是資料夾要一個個開的話也是有點麻煩，
 那麼把方向改為，search png將結果寫入txt，網頁來讀取這些圖檔來呈現
+
+20200620 Git
+建立GitPractice_*練習互蓋README.md，解衝突
