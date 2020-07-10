@@ -10,6 +10,7 @@ robamroute.bat自動產生出的batch，必須要用系統管理員執行
 
 20170811 Windows_Batch
 robamcmd.bat直接從指令找出路由，自動寫入執行檔robamroute.bat
+
 1. 指令用for取得內容字串，指令包含雙引號，必須+usebackq屬性
 2. |不能用要+^
 3. DO後面接想做的事情，還不知道為什麼%i下一行取不到，所以只好讓DO來set另外一個變數接欄位變數
@@ -23,3 +24,14 @@ robamcmd.bat直接從指令找出路由，自動寫入執行檔robamroute.bat
 20170815 Web
 找到一個FastStone可以取代ACDsee，只是資料夾要一個個開的話也是有點麻煩，
 那麼把方向改為，search png將結果寫入txt，網頁來讀取這些圖檔來呈現
+
+20200710 Git
+GitPractice_A／B同時從master切出來，但GitPractice_A已經先修改了後，並且PUSH、合併進master。
+接下來GitPractice_B同樣編輯相同位置不同文字，來解衝突
+（備註一下，Typora編輯上，直接按enter換行段落較高、按shift+enter換行段落較低）
+
+###### 
+
+###### 
+
+# 
