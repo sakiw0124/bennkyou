@@ -28,4 +28,5 @@ robamcmd.bat直接從指令找出路由，自動寫入執行檔robamroute.bat
 GitPractice_A／B同時從master切出來，但GitPractice_A已經先修改了後，並且PUSH、合併進master。
 接下來GitPractice_B同樣編輯相同位置不同文字，來解衝突
 （備註一下，Typora編輯上，直接按enter換行段落較高、按shift+enter換行段落較低）
+沒有把原本人家改的留下來呀！是要怎麼解衝突啦！
 GitPractice_B同位置也加一行自己的
