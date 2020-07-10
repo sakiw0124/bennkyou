@@ -38,3 +38,15 @@ GitPractice_B同位置也加一行自己的
 4. 因為誰merge誰的關係，這兩行的位置不是我要的，我做了交換、並且增加了3 & 4，
    剛剛曾經直接接受了一方變更後，直接merge回master就蓋過了，
    所以ex. 只要在GitPractice_B接受了任何變更，合併進master以後，就會以GitPractice_B為主
+重新整理一下步驟：保險起見，應該是在自己的分支解衝突再合併
+1. GitPractice_B準備合併進master前，merge master進GitPractice_B
+   SourceTree停在GitPractice_B的分支上，按merge，選擇All Branches，
+   去選到master最後的commit紀錄按下OK
+2. 在GitPractice_B上解衝突
+   SourceTree在第一步驟做完後，會提示有衝突的訊息，到VSCode上，會出現變更提示，
+   兩者都要就選擇兩者變更。完畢後覺得不滿意還可以再加內容
+3. 合併回master
+   SourceTree切到master分支上，按merge，選擇All Branches，
+   去選GitPractice_B分支最後Commit紀錄按下OK
+4. 上傳到遠端
+   以上做完都還在本地端喔，最後要按下push才能更新遠端內容。push如果又報差異，就同樣處理
