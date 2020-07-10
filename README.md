@@ -30,5 +30,11 @@ GitPractice_A／B同時從master切出來，但GitPractice_A已經先修改了�
 （備註一下，Typora編輯上，直接按enter換行段落較高、按shift+enter換行段落較低）
 沒有把原本人家改的留下來呀！是要怎麼解衝突啦！
 GitPractice_B同位置也加一行自己的
+1. 這行在master分支加進去，commit & push進入遠端
 2. 這行是切換到GitPractice_B分支，沒有1的情況下，增加在1的位置上，
    必須要先commit & push到GitPractice_B以後才開始merge
+3. 停在GitPractice_B分支上，先把master合併進GitPractice_B，SourceTree提示有衝突，
+   到VSCode裡面解衝突，他會呈現有來源變更、目前變更，因為兩行都要，選擇兩者接受
+4. 因為誰merge誰的關係，這兩行的位置不是我要的，我做了交換、並且增加了3 & 4，
+   剛剛曾經直接接受了一方變更後，直接merge回master就蓋過了，
+   所以ex. 只要在GitPractice_B接受了任何變更，合併進master以後，就會以GitPractice_B為主
